@@ -7,7 +7,7 @@ export const menuCategories = [
     products: [
       { id: 'shashlik', name: 'Shashlik', price: 25000 },
       { id: 'qozon-kabob', name: 'Qozon kabob', price: 30000 },
-      { id: 'lag\'mon', name: 'Lag\'mon', price: 20000 },
+      { id: 'lagmon', name: "Lag'mon", price: 20000 },
       { id: 'osh', name: 'Osh', price: 18000 },
       { id: 'somsa', name: 'Somsa', price: 8000 },
       { id: 'manti', name: 'Manti', price: 15000 },

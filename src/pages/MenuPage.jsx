@@ -170,7 +170,12 @@ const MenuPage = () => {
               <input
                 type="number"
                 value={tableNumber}
-                onChange={(e) => setTableNumber(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === '' || parseInt(value) >= 0) {
+                    setTableNumber(value);
+                  }
+                }}
                 placeholder="Masalan: 20"
                 min="1"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -184,11 +189,12 @@ const MenuPage = () => {
                   Buyurtma bo'sh
                 </p>
               ) : (
-                <div className="space-y-2 max-h-96 overflow-y-auto">
+                <div className="space-y-2 max-h-96 overflow-y-auto" role="list">
                   {cart.map((item) => (
                     <div
                       key={item.id}
                       className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
+                      role="listitem"
                     >
                       <div className="flex-1">
                         <p className="font-medium text-gray-800">{item.name}</p>
@@ -230,6 +236,7 @@ const MenuPage = () => {
                 <button
                   onClick={handleSubmitOrder}
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                   className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Yuborilmoqda...' : '✅ Buyurtmani tasdiqlash'}
