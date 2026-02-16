@@ -69,9 +69,9 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
       const receiptData = {
         tableNumber,
         cart: [...cart],
-        subtotal: getSubtotal(),
-        serviceFee: getServiceFee(),
-        totalPrice: getTotalPrice(),
+        subtotal: subtotal,
+        serviceFee: serviceFee,
+        totalPrice: total,
         timestamp: new Date().toLocaleString('uz-UZ'),
         telegramSuccess: false
       };
