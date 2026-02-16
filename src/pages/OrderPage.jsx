@@ -29,7 +29,7 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
   }, [cart]);
 
   const serviceFee = useMemo(() => {
-    return subtotal * SERVICE_FEE_PERCENTAGE;
+    return Math.round(subtotal * SERVICE_FEE_PERCENTAGE);
   }, [subtotal]);
 
   const totalPrice = useMemo(() => {
