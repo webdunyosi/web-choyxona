@@ -100,7 +100,7 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
             value={tableNumber}
             onChange={(e) => {
               const value = e.target.value;
-              if (value === '' || parseInt(value) >= 0) {
+              if (value === '' || (!isNaN(value) && Number(value) >= 0)) {
                 setTableNumber(value);
               }
             }}
