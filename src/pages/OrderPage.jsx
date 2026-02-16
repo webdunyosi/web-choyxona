@@ -56,29 +56,23 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
         tableNumber,
         cart: [...cart],
         totalPrice: getTotalPrice(),
-        timestamp: new Date().toLocaleString('uz-UZ')
+        timestamp: new Date().toLocaleString('uz-UZ'),
+        telegramSuccess: false
       };
 
       const success = await sendToTelegram(message);
+      
+      // Update telegram status
+      receiptData.telegramSuccess = success;
 
-      if (success) {
-        // Store order data and show receipt modal
-        setOrderData(receiptData);
-        setShowReceipt(true);
-        
-        // Reset form
-        setCart([]);
-        setTableNumber('');
-      } else {
-        // Even if Telegram fails, show the receipt modal (order is still valid locally)
-        setOrderData(receiptData);
-        setShowReceipt(true);
-        
-        // Reset form
-        setCart([]);
-        setTableNumber('');
-        
-        // Log error but don't block user experience
+      // Show receipt modal and reset form
+      setOrderData(receiptData);
+      setShowReceipt(true);
+      setCart([]);
+      setTableNumber('');
+      
+      // Log warning if Telegram failed
+      if (!success) {
         console.warn('Telegram yuborishda xatolik, lekin buyurtma mahalliy saqlandi');
       }
     } catch (error) {

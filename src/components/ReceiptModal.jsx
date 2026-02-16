@@ -5,7 +5,7 @@ import { MdCheckCircle, MdPrint } from 'react-icons/md';
 const ReceiptModal = ({ isOpen, onClose, orderData }) => {
   if (!isOpen) return null;
 
-  const { tableNumber, cart, totalPrice, timestamp } = orderData;
+  const { tableNumber, cart, totalPrice, timestamp, telegramSuccess } = orderData;
 
   const handlePrint = () => {
     window.print();
@@ -101,7 +101,11 @@ const ReceiptModal = ({ isOpen, onClose, orderData }) => {
           {/* Footer */}
           <div className="border-t-2 border-dashed border-gray-300 pt-4 text-center">
             <p className="text-sm text-gray-600 mb-2">Buyurtmangiz qabul qilindi</p>
-            <p className="text-xs text-gray-500">Telegramga muvaffaqiyatli yuborildi</p>
+            {telegramSuccess ? (
+              <p className="text-xs text-gray-500">Telegramga muvaffaqiyatli yuborildi</p>
+            ) : (
+              <p className="text-xs text-amber-600">Telegram yuborilmadi, lekin buyurtma saqlandi</p>
+            )}
           </div>
 
           {/* Action buttons */}
