@@ -2,11 +2,11 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, currentPage, setCurrentPage }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       {/* Main content area */}
       <div className="flex-1 flex flex-col">
