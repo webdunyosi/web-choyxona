@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoClose } from 'react-icons/io5';
 import { MdCheckCircle, MdPrint } from 'react-icons/md';
-import { getWaiterFullName } from '../data/waitersData';
+import { getWaiterFullName } from '../data/waitersUtils';
 
 const ReceiptModal = ({ isOpen, onClose, orderData }) => {
   if (!isOpen) return null;

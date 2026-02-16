@@ -3,7 +3,7 @@ import { sendToTelegram } from '../services/telegramService';
 import { IoArrowBack, IoCart } from 'react-icons/io5';
 import { MdCheckCircle } from 'react-icons/md';
 import ReceiptModal from '../components/ReceiptModal';
-import { waiters, getWaiterById, getWaiterFullName } from '../data/waitersData';
+import { waiters, getWaiterById, getWaiterFullName } from '../data/waitersUtils';
 
 const SERVICE_FEE_PERCENTAGE = 0.1; // 10% service fee
 

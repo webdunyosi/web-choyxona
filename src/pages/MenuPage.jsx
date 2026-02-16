@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { menuCategories } from '../data/menuData';
+import { menuCategories } from '../data/menuUtils';
 import { IoCart, IoRestaurant, IoFastFood, IoCafe } from 'react-icons/io5';
 import { GiBread } from 'react-icons/gi';
 
