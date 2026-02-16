@@ -21,36 +21,15 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-2">
-            <IoRestaurant className="text-emerald-600" />
-            Menyu
-          </h1>
-        </div>
-        {cart.length > 0 && (
-          <button
-            onClick={onNavigateToOrder}
-            aria-label={`Savatga o'tish - ${cart.length} mahsulot`}
-            className="cursor-pointer relative p-1 bg-green-600 text-white rounded-xl duraction-300 hover:bg-green-700 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
-            <IoCart className="text-2xl" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md">
-              {cart.length}
-            </span>
-          </button>
-        )}
-      </div>
-
+    <div className="w-full">
       {/* Category tabs */}
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-        <div className="flex gap-3 overflow-x-auto pb-2">
+      <div className="bg-white rounded-xl shadow-lg p-2 mb-5 flex items-center justify-between">
+        <div className="flex gap-3">
           {menuCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold duraction-300 whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
+              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold whitespace-nowrap cursor-pointer duration-300 hover:scale-105 ${
                 selectedCategory === category.id
                   ? 'bg-linear-to-r from-emerald-600 to-emerald-700 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -61,6 +40,18 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
             </button>
           ))}
         </div>
+        {cart.length > 0 && (
+          <button
+            onClick={onNavigateToOrder}
+            aria-label={`Savatga o'tish - ${cart.length} mahsulot`}
+            className="cursor-pointer relative p-1 bg-green-600 text-white rounded-xl duraction-300 hover:bg-green-700 shadow-lg duration-300 hover:shadow-xl hover:scale-105"
+          >
+            <IoCart className="text-2xl" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md">
+              {cart.length}
+            </span>
+          </button>
+        )}
       </div>
 
       {/* Products grid */}
