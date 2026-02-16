@@ -33,21 +33,24 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
+              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
                 selectedCategory === category.id
-                  ? 'bg-linear-to-r from-blue-600 to-blue-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-linear-to-r from-blue-600 to-blue-700 text-white scale-105'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 scale-100'
               }`}
             >
-              <span className="text-2xl">{category.icon}</span>
-              <span>{category.name}</span>
+              <span className="text-2xl transition-transform duration-300 ease-in-out">{category.icon}</span>
+              <span className="transition-all duration-300 ease-in-out">{category.name}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Products grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div 
+        key={selectedCategory}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-fadeIn"
+      >
         {currentCategory.products.map((product) => {
           const cartItem = cart.find(item => item.id === product.id);
           const quantity = cartItem ? cartItem.quantity : 0;
