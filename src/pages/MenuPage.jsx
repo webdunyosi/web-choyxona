@@ -96,7 +96,6 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                 <button
                   onClick={() => {
                     setCart([...cart, { ...product, quantity: 1 }]);
-                    onNavigateToOrder();
                   }}
                   className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
