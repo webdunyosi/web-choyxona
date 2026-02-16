@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { sendToTelegram } from '../services/telegramService';
 import { IoArrowBack, IoCart } from 'react-icons/io5';
 import { MdCheckCircle } from 'react-icons/md';
@@ -22,17 +22,17 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
     }
   };
 
-  const getSubtotal = () => {
+  const subtotal = useMemo(() => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-  };
+  }, [cart]);
 
-  const getServiceFee = () => {
-    return getSubtotal() * 0.1; // 10% service fee
-  };
+  const serviceFee = useMemo(() => {
+    return subtotal * 0.1; // 10% service fee
+  }, [subtotal]);
 
-  const getTotalPrice = () => {
-    return getSubtotal() + getServiceFee();
-  };
+  const totalPrice = useMemo(() => {
+    return subtotal + serviceFee;
+  }, [subtotal, serviceFee]);
 
   const handleSubmitOrder = async () => {
     if (!tableNumber.trim()) {
@@ -57,13 +57,9 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
         message += `${index + 1}. ${item.name} x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} so'm\n`;
       });
       
-      const subtotal = getSubtotal();
-      const serviceFee = getServiceFee();
-      const total = getTotalPrice();
-      
       message += `\n<b>📋 Oraliq summa:</b> ${subtotal.toLocaleString()} so'm\n`;
       message += `<b>🔧 Xizmat haqi (10%):</b> ${serviceFee.toLocaleString()} so'm\n`;
-      message += `<b>💰 Jami summa:</b> ${total.toLocaleString()} so'm`;
+      message += `<b>💰 Jami summa:</b> ${totalPrice.toLocaleString()} so'm`;
 
       // Prepare order data for receipt first
       const receiptData = {
@@ -71,7 +67,7 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
         cart: [...cart],
         subtotal: subtotal,
         serviceFee: serviceFee,
-        totalPrice: total,
+        totalPrice: totalPrice,
         timestamp: new Date().toLocaleString('uz-UZ'),
         telegramSuccess: false
       };
@@ -217,13 +213,13 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
                 <div className="flex justify-between items-center text-gray-700">
                   <span className="text-lg">Oraliq summa:</span>
                   <span className="text-xl font-semibold">
-                    {getSubtotal().toLocaleString()} so'm
+                    {subtotal.toLocaleString()} so'm
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-gray-700">
                   <span className="text-lg">Xizmat haqi (10%):</span>
                   <span className="text-xl font-semibold">
-                    {getServiceFee().toLocaleString()} so'm
+                    {serviceFee.toLocaleString()} so'm
                   </span>
                 </div>
                 <div className="border-t pt-2 flex justify-between items-center">
@@ -231,7 +227,7 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
                     Jami:
                   </span>
                   <span className="text-3xl font-bold text-emerald-600">
-                    {getTotalPrice().toLocaleString()} so'm
+                    {totalPrice.toLocaleString()} so'm
                   </span>
                 </div>
               </div>
