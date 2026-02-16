@@ -1,5 +1,7 @@
 import React from 'react';
 
+const LOGO_PATH = '/logo.png';
+
 const Header = () => {
   return (
     <header className="bg-gradient-to-r from-emerald-600 to-teal-600 shadow-lg">
@@ -7,8 +9,8 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <div className="flex-shrink-0">
             <img 
-              src="/logo.png" 
-              alt="Choyxona Logo" 
+              src={LOGO_PATH} 
+              alt="Choyxona Tea House Logo" 
               className="h-16 w-16 object-contain rounded-lg bg-white/10 p-2 backdrop-blur-sm hover:scale-105 transition-transform duration-300"
             />
           </div>
