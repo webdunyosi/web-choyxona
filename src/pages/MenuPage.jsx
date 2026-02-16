@@ -33,7 +33,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
           <button
             onClick={onNavigateToOrder}
             aria-label={`Savatga o'tish - ${cart.length} mahsulot`}
-            className="cursor-pointer relative p-1 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="cursor-pointer relative p-1 bg-green-600 text-white rounded-xl duraction-300 hover:bg-green-700 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             <IoCart className="text-2xl" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md">
@@ -50,9 +50,9 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
+              className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold duraction-300 whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
                 selectedCategory === category.id
-                  ? 'bg-linear-to-r from-blue-600 to-blue-700 text-white'
+                  ? 'bg-linear-to-r from-emerald-600 to-emerald-700 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -72,7 +72,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
           return (
             <div
               key={`${product.id}-${selectedCategory}`}
-              className="card-animate bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="card-animate bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-1 duration-300"
               style={{
                 animationDelay: `${index * 0.1}s`
               }}
@@ -100,7 +100,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                   {product.name}
                 </h3>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-emerald-600">
                     {product.price.toLocaleString()}
                   </p>
                   <span className="text-sm text-gray-500">so'm</span>
@@ -121,7 +121,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                           ));
                         }
                       }}
-                      className="w-10 h-10 bg-red-500 text-white rounded-lg hover:bg-red-600 font-bold text-xl shadow-md hover:shadow-lg transition-all"
+                      className="w-10 h-10 bg-red-500 text-white rounded-lg duraction-300 hover:bg-red-600 font-bold text-xl shadow-md hover:shadow-lg "
                     >
                       -
                     </button>
@@ -134,7 +134,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                             : item
                         ));
                       }}
-                      className="w-10 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600 font-bold text-xl shadow-md hover:shadow-lg transition-all"
+                      className="w-10 h-10 bg-green-500 text-white rounded-lg duraction-300 hover:bg-green-600 font-bold text-xl shadow-md hover:shadow-lg "
                     >
                       +
                     </button>
@@ -144,7 +144,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                     onClick={() => {
                       setCart([...cart, { ...product, quantity: 1 }]);
                     }}
-                    className="w-full bg-linear-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-md hover:shadow-lg"
+                    className="w-full bg-linear-to-r from-emerald-600 to-emerald-700 text-white py-3 rounded-lg duraction-300 hover:from-emerald-700 hover:to-emerald-800  font-semibold shadow-md hover:shadow-lg"
                   >
                     <IoCart className="inline-block mr-1" aria-hidden="true" />
                     Qo'shish
