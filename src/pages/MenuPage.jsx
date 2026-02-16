@@ -52,7 +52,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
               onClick={() => setSelectedCategory(category.id)}
               className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all whitespace-nowrap shadow-md hover:shadow-lg transform hover:scale-105 ${
                 selectedCategory === category.id
-                  ? 'bg-linear-to-r from-blue-600 to-blue-700 text-white'
+                  ? 'bg-linear-to-r from-emerald-600 to-emerald-700 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -100,7 +100,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                   {product.name}
                 </h3>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-emerald-600">
                     {product.price.toLocaleString()}
                   </p>
                   <span className="text-sm text-gray-500">so'm</span>
@@ -144,7 +144,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                     onClick={() => {
                       setCart([...cart, { ...product, quantity: 1 }]);
                     }}
-                    className="w-full bg-linear-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-md hover:shadow-lg"
+                    className="w-full bg-linear-to-r from-emerald-600 to-emerald-700 text-white py-3 rounded-lg hover:from-emerald-700 hover:to-emerald-800 transition-all font-semibold shadow-md hover:shadow-lg"
                   >
                     <IoCart className="inline-block mr-1" aria-hidden="true" />
                     Qo'shish
