@@ -3,22 +3,18 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 
 const Layout = ({ children, currentPage, onPageChange }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // Initialize with proper mobile detection
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => window.innerWidth >= 768);
 
-  // Detect mobile screen size
+  // Update mobile detection on resize
   useEffect(() => {
-    const checkMobile = () => {
+    const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      // On desktop, open sidebar by default
-      if (window.innerWidth >= 768) {
-        setIsSidebarOpen(true);
-      }
     };
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const toggleSidebar = () => {
