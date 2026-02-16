@@ -24,7 +24,7 @@ const Header = ({ onToggleSidebar }) => {
           <div className="shrink-0">
             <button
               onClick={onToggleSidebar}
-              className="p-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              className="p-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
               aria-label="Toggle sidebar"
             >
               <IoMenu className="w-7 h-7 text-white" />
