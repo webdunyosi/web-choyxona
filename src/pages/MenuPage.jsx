@@ -11,18 +11,17 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-4xl font-bold text-gray-800 mb-2">🍽️ Menyu</h1>
-          <p className="text-gray-600">Mahsulotlarni tanlang va savatga qo'shing</p>
         </div>
         {cart.length > 0 && (
           <button
             onClick={onNavigateToOrder}
-            className="flex items-center gap-3 px-8 py-4 bg-linear-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+            aria-label={`Savatga o'tish - ${cart.length} mahsulot`}
+            className="cursor-pointer relative p-1 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             <span className="text-2xl">🛒</span>
-            <div className="text-left">
-              <div className="text-sm opacity-90">Savat</div>
-              <div className="font-bold">{cart.length} mahsulot</div>
-            </div>
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md">
+              {cart.length}
+            </span>
           </button>
         )}
       </div>
