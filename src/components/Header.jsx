@@ -1,4 +1,7 @@
-const Header = () => {
+import React from 'react';
+import { IoMenu } from 'react-icons/io5';
+
+const Header = ({ onToggleSidebar }) => {
   return (
     <header className="bg-linear-to-r from-emerald-600 to-teal-600 shadow-lg sticky top-0 z-10">
       <div className="px-6 py-2">
@@ -17,6 +20,15 @@ const Header = () => {
             <p className="text-emerald-50 mt-1 text-sm">
               Menyuni boshqarish tizimi
             </p>
+          </div>
+          <div className="shrink-0">
+            <button
+              onClick={onToggleSidebar}
+              className="p-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              aria-label="Toggle sidebar"
+            >
+              <IoMenu className="w-7 h-7 text-white" />
+            </button>
           </div>
         </div>
       </div>
