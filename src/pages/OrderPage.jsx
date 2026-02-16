@@ -22,8 +22,16 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
     }
   };
 
-  const getTotalPrice = () => {
+  const getSubtotal = () => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  const getServiceFee = () => {
+    return getSubtotal() * 0.1; // 10% service fee
+  };
+
+  const getTotalPrice = () => {
+    return getSubtotal() + getServiceFee();
   };
 
   const handleSubmitOrder = async () => {
@@ -49,12 +57,20 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
         message += `${index + 1}. ${item.name} x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} so'm\n`;
       });
       
-      message += `\n<b>💰 Jami summa:</b> ${getTotalPrice().toLocaleString()} so'm`;
+      const subtotal = getSubtotal();
+      const serviceFee = getServiceFee();
+      const total = getTotalPrice();
+      
+      message += `\n<b>📋 Oraliq summa:</b> ${subtotal.toLocaleString()} so'm\n`;
+      message += `<b>🔧 Xizmat haqi (10%):</b> ${serviceFee.toLocaleString()} so'm\n`;
+      message += `<b>💰 Jami summa:</b> ${total.toLocaleString()} so'm`;
 
       // Prepare order data for receipt first
       const receiptData = {
         tableNumber,
         cart: [...cart],
+        subtotal: getSubtotal(),
+        serviceFee: getServiceFee(),
         totalPrice: getTotalPrice(),
         timestamp: new Date().toLocaleString('uz-UZ'),
         telegramSuccess: false
@@ -197,13 +213,27 @@ const OrderPage = ({ cart, setCart, onBackToMenu }) => {
         {cart.length > 0 && (
           <>
             <div className="border-t pt-6 mb-6">
-              <div className="flex justify-between items-center">
-                <span className="text-xl font-medium text-gray-700">
-                  Jami:
-                </span>
-                <span className="text-3xl font-bold text-emerald-600">
-                  {getTotalPrice().toLocaleString()} so'm
-                </span>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="text-lg">Oraliq summa:</span>
+                  <span className="text-xl font-semibold">
+                    {getSubtotal().toLocaleString()} so'm
+                  </span>
+                </div>
+                <div className="flex justify-between items-center text-gray-700">
+                  <span className="text-lg">Xizmat haqi (10%):</span>
+                  <span className="text-xl font-semibold">
+                    {getServiceFee().toLocaleString()} so'm
+                  </span>
+                </div>
+                <div className="border-t pt-2 flex justify-between items-center">
+                  <span className="text-xl font-medium text-gray-700">
+                    Jami:
+                  </span>
+                  <span className="text-3xl font-bold text-emerald-600">
+                    {getTotalPrice().toLocaleString()} so'm
+                  </span>
+                </div>
               </div>
             </div>
 
