@@ -56,14 +56,14 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
           return (
             <div
               key={product.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="bg-black/80 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 border border-gray-700/50 hover:border-gray-500/50 animate-fade-in"
             >
               {/* Product Image */}
-              <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+              <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden group">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     e.target.style.display = 'none';
                   }}
@@ -76,19 +76,19 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
               </div>
 
               {/* Product Info */}
-              <div className="p-4">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
+              <div className="p-4 bg-gradient-to-b from-black/50 to-black/70 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">
                   {product.name}
                 </h3>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-blue-400 drop-shadow-lg">
                     {product.price.toLocaleString()}
                   </p>
-                  <span className="text-sm text-gray-500">so'm</span>
+                  <span className="text-sm text-gray-300">so'm</span>
                 </div>
                 
                 {quantity > 0 ? (
-                  <div className="flex items-center justify-between bg-gray-50 rounded-lg p-2">
+                  <div className="flex items-center justify-between bg-black/40 backdrop-blur-sm rounded-lg p-2 border border-gray-600/30">
                     <button
                       onClick={() => {
                         const newQuantity = quantity - 1;
@@ -102,11 +102,11 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                           ));
                         }
                       }}
-                      className="w-10 h-10 bg-red-500 text-white rounded-lg hover:bg-red-600 font-bold text-xl shadow-md hover:shadow-lg transition-all"
+                      className="w-10 h-10 bg-red-500 text-white rounded-lg hover:bg-red-600 font-bold text-xl shadow-md hover:shadow-lg transition-all hover:scale-110"
                     >
                       -
                     </button>
-                    <span className="text-2xl font-bold text-gray-800 px-4">{quantity}</span>
+                    <span className="text-2xl font-bold text-white px-4">{quantity}</span>
                     <button
                       onClick={() => {
                         setCart(cart.map(item =>
@@ -115,7 +115,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                             : item
                         ));
                       }}
-                      className="w-10 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600 font-bold text-xl shadow-md hover:shadow-lg transition-all"
+                      className="w-10 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600 font-bold text-xl shadow-md hover:shadow-lg transition-all hover:scale-110"
                     >
                       +
                     </button>
@@ -125,7 +125,7 @@ const MenuPage = ({ cart, setCart, onNavigateToOrder }) => {
                     onClick={() => {
                       setCart([...cart, { ...product, quantity: 1 }]);
                     }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-md hover:shadow-lg"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-md hover:shadow-lg hover:scale-105 transform"
                   >
                     🛒 Qo'shish
                   </button>
