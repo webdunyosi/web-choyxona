@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = ({ currentPage, onPageChange }) => {
   return (
-    <aside className="w-64 bg-white shadow-lg flex flex-col">
+    <aside className="w-64 flex flex-col">
       {/* Logo/Brand */}
       <div className="p-6 border-b border-gray-200">
         <h2 className="text-xl font-bold text-gray-800">🍵 Choyxona</h2>
