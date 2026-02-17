@@ -3,6 +3,8 @@ import { waiters } from '../data/waitersData';
 import { sendToTelegram } from '../services/telegramService';
 import { IoStar, IoStarOutline, IoPerson, IoCheckmarkCircle, IoSend, IoWarning, IoCloseCircle } from 'react-icons/io5';
 
+const MAX_RATING = 5;
+
 const WaiterRatingPage = () => {
   const [selectedWaiter, setSelectedWaiter] = useState(null);
   const [rating, setRating] = useState(0);
@@ -12,6 +14,13 @@ const WaiterRatingPage = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Sanitize text for HTML to prevent injection
+  const escapeHtml = (text) => {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +34,14 @@ const WaiterRatingPage = () => {
 
     setIsSubmitting(true);
 
+    // Sanitize comment to prevent HTML injection
+    const sanitizedComment = comment ? escapeHtml(comment) : 'Izoh yo\'q';
+
     // Format message for Telegram
     const message = `<b>⭐ Afitsant Bahosi</b>\n\n` +
       `👤 <b>Afitsant:</b> ${selectedWaiter.firstName} ${selectedWaiter.lastName}\n` +
-      `⭐ <b>Baho:</b> ${rating}/5 ${Array(rating).fill('⭐').join('')}\n` +
-      `💬 <b>Izoh:</b> ${comment || 'Izoh yo\'q'}\n\n` +
+      `⭐ <b>Baho:</b> ${rating}/${MAX_RATING} ${Array(rating).fill('⭐').join('')}\n` +
+      `💬 <b>Izoh:</b> ${sanitizedComment}\n\n` +
       `📅 <b>Sana:</b> ${new Date().toLocaleString('uz-UZ')}`;
 
     const success = await sendToTelegram(message);
@@ -55,7 +67,7 @@ const WaiterRatingPage = () => {
   };
 
   const renderStars = (count, isInteractive = false) => {
-    return Array(5).fill(0).map((_, index) => {
+    return Array(MAX_RATING).fill(0).map((_, index) => {
       const starValue = index + 1;
       const isFilled = isInteractive 
         ? (hoveredRating || rating) >= starValue 
@@ -137,6 +149,17 @@ const WaiterRatingPage = () => {
                 src={waiter.image}
                 alt={`${waiter.firstName} ${waiter.lastName}`}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to a placeholder icon if image fails to load
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = `
+                    <div class="flex items-center justify-center h-full">
+                      <svg class="w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  `;
+                }}
               />
               {selectedWaiter?.id === waiter.id && (
                 <div className="absolute top-2 right-2 bg-emerald-500 text-white rounded-full p-2 shadow-lg">
