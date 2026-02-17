@@ -42,3 +42,24 @@ export const formatReportForTelegram = (report) => {
   
   return message;
 };
+
+export const sendWaiterRatingToTelegram = async (ratingData) => {
+  const { rating, comment, customerName, date } = ratingData;
+  
+  // Create star emoji representation
+  const starEmoji = '⭐'.repeat(rating);
+  const emptyStarEmoji = '☆'.repeat(5 - rating);
+  
+  let message = `<b>🌟 Afitsant Bahosi</b>\n\n`;
+  message += `👤 <b>Mijoz:</b> ${customerName}\n`;
+  message += `📅 <b>Sana:</b> ${date}\n`;
+  message += `⭐ <b>Baho:</b> ${starEmoji}${emptyStarEmoji} (${rating}/5)\n\n`;
+  
+  if (comment && comment.trim()) {
+    message += `💬 <b>Izoh:</b>\n${comment}\n`;
+  } else {
+    message += `💬 <i>Izoh yo'q</i>\n`;
+  }
+  
+  return await sendToTelegram(message);
+};
