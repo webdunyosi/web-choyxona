@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { waiters } from '../data/waitersData';
 import { sendToTelegram } from '../services/telegramService';
-import { IoStar, IoStarOutline, IoPerson, IoCheckmarkCircle, IoSend } from 'react-icons/io5';
+import { IoStar, IoStarOutline, IoPerson, IoCheckmarkCircle, IoSend, IoWarning, IoCloseCircle } from 'react-icons/io5';
 
 const WaiterRatingPage = () => {
   const [selectedWaiter, setSelectedWaiter] = useState(null);
@@ -10,12 +10,16 @@ const WaiterRatingPage = () => {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!selectedWaiter || rating === 0) {
-      alert('Iltimos, afitsantni va bahoni tanlang!');
+      setErrorMessage('Iltimos, afitsantni va bahoni tanlang!');
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
       return;
     }
 
@@ -44,7 +48,9 @@ const WaiterRatingPage = () => {
         setShowSuccess(false);
       }, 3000);
     } else {
-      alert('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
+      setErrorMessage('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
     }
   };
 
@@ -82,6 +88,17 @@ const WaiterRatingPage = () => {
           <div>
             <p className="font-bold">Muvaffaqiyatli yuborildi!</p>
             <p className="text-sm">Fikringiz uchun rahmat</p>
+          </div>
+        </div>
+      )}
+
+      {/* Error Message */}
+      {showError && (
+        <div className="fixed top-4 right-4 z-50 bg-red-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 animate-slide-in">
+          <IoCloseCircle className="text-3xl" />
+          <div>
+            <p className="font-bold">Xatolik!</p>
+            <p className="text-sm">{errorMessage}</p>
           </div>
         </div>
       )}
