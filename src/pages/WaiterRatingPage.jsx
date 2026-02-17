@@ -14,12 +14,21 @@ const WaiterRatingPage = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageErrors, setImageErrors] = useState({});
 
   // Sanitize text for HTML to prevent injection
+  // This escapes HTML special characters for Telegram's HTML parse mode
   const escapeHtml = (text) => {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  };
+
+  const handleImageError = (waiterId) => {
+    setImageErrors(prev => ({ ...prev, [waiterId]: true }));
   };
 
   const handleSubmit = async (e) => {
@@ -144,23 +153,17 @@ const WaiterRatingPage = () => {
             }}
           >
             {/* Waiter Image */}
-            <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-              <img
-                src={waiter.image}
-                alt={`${waiter.firstName} ${waiter.lastName}`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to a placeholder icon if image fails to load
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = `
-                    <div class="flex items-center justify-center h-full">
-                      <svg class="w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                      </svg>
-                    </div>
-                  `;
-                }}
-              />
+            <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden flex items-center justify-center">
+              {imageErrors[waiter.id] ? (
+                <IoPerson className="w-24 h-24 text-gray-400" />
+              ) : (
+                <img
+                  src={waiter.image}
+                  alt={`${waiter.firstName} ${waiter.lastName}`}
+                  className="w-full h-full object-cover"
+                  onError={() => handleImageError(waiter.id)}
+                />
+              )}
               {selectedWaiter?.id === waiter.id && (
                 <div className="absolute top-2 right-2 bg-emerald-500 text-white rounded-full p-2 shadow-lg">
                   <IoCheckmarkCircle className="text-2xl" />
