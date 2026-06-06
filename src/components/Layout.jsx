@@ -30,15 +30,6 @@ const Layout = ({ children, currentPage, onPageChange, cart = [] }) => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex">
-      {/* Backdrop for mobile - appears behind sidebar when open */}
-      {isSidebarOpen && isMobile && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={closeSidebar}
-          aria-hidden="true"
-        />
-      )}
-      
       {/* Sidebar */}
       <Sidebar 
         currentPage={currentPage} 
