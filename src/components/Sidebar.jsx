@@ -12,7 +12,7 @@ const Sidebar = ({ currentPage, onPageChange, isOpen, isMobile, onClose }) => {
 
   return (
     <aside 
-      className={`w-full md:w-64 flex flex-col bg-linear-to-b from-emerald-600 to-teal-600 shadow-xl fixed left-0 top-0 h-screen z-50 transition-transform duration-300 p-2 ${
+      className={`hidden md:flex w-full md:w-64 flex-col bg-linear-to-b from-emerald-600 to-teal-600 shadow-xl fixed left-0 top-0 h-screen z-50 transition-transform duration-300 p-2 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >

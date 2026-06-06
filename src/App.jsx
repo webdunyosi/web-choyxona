@@ -40,7 +40,7 @@ const App = () => {
   };
 
   return (
-    <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+    <Layout currentPage={currentPage} onPageChange={setCurrentPage} cart={cart}>
       {renderPage()}
     </Layout>
   );

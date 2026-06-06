@@ -3,7 +3,7 @@ import { IoMenu } from 'react-icons/io5';
 
 const Header = ({ onToggleSidebar }) => {
   return (
-    <header className="bg-linear-to-r from-emerald-600 to-teal-600 shadow-lg sticky top-0 z-10">
+    <header className="hidden md:block bg-linear-to-r from-emerald-600 to-teal-600 shadow-lg sticky top-0 z-10">
       <div className="px-6 py-2">
         <div className="flex items-center gap-4">
           <div className="shrink-0">
